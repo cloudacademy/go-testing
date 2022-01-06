@@ -44,32 +44,36 @@ var _ = Describe("Rocket", func() {
 				Expect(err).ShouldNot(HaveOccurred())
 			})
 
+			//nolint:errcheck
 			It("can throttle down successfully as long as it's resulting speed does not drop below 1000", func() {
-				_, _ = rocket.ThrottleUp(2000)
+				rocket.ThrottleUp(2000)
 				speed, err := rocket.ThrottleDown(100)
 				Expect(speed).Should(Equal(1900))
 				Expect(err).ShouldNot(HaveOccurred())
 			})
 
+			//nolint:errcheck
 			It("will throw an error if it trys to throttle up and it's resulting speed exceeds its max speed", func() {
-				_, _ = rocket.ThrottleUp(25000)
+				rocket.ThrottleUp(25000)
 				_, err := rocket.ThrottleUp(1)
 
 				Expect(err).Should(HaveOccurred())
 			})
 
+			//nolint:errcheck
 			It("will throw an error if it trys to throttle down and it's resulting speed is less than 1000", func() {
-				_, _ = rocket.ThrottleUp(2000)
+				rocket.ThrottleUp(2000)
 				_, err := rocket.ThrottleDown(1500)
 
 				Expect(err).Should(HaveOccurred())
 			})
 
+			//nolint:errcheck
 			It("tracks it's current speed", func() {
-				_, _ = rocket.ThrottleUp(2000)
-				_, _ = rocket.ThrottleDown(5)
-				_, _ = rocket.ThrottleDown(10)
-				_, _ = rocket.ThrottleUp(200)
+				rocket.ThrottleUp(2000)
+				rocket.ThrottleDown(5)
+				rocket.ThrottleDown(10)
+				rocket.ThrottleUp(200)
 
 				Expect(rocket.CurrentSpeed()).Should(Equal(2185))
 			})

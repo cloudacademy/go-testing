@@ -20,7 +20,8 @@ func TestIgniteRocket(t *testing.T) {
 	rocket := NewRocket("Saturn-V", "Nasa", 5, 25000)
 	rocket.AddFuel(100)
 
-	_ = rocket.Ignite()
+	//nolint:errcheck
+	rocket.Ignite()
 	got := rocket.Engines.Ignited
 	want := true
 
@@ -49,14 +50,16 @@ func TestThrottleUpEnginesNotIgnited(t *testing.T) {
 	}
 }
 
+//nolint:errcheck
 func TestThrottleUp(t *testing.T) {
 	rocket := NewRocket("Saturn-V", "Nasa", 5, 25000)
 	rocket.AddFuel(100)
 
-	_ = rocket.Ignite()
+	rocket.Ignite()
 
-	_, _ = rocket.ThrottleUp(100)
-	_, _ = rocket.ThrottleUp(100)
+	rocket.ThrottleUp(100)
+	rocket.ThrottleUp(100)
+
 	got, _ := rocket.ThrottleUp(100)
 	want := 300
 
@@ -65,13 +68,14 @@ func TestThrottleUp(t *testing.T) {
 	}
 }
 
+//nolint:errcheck
 func TestThrottleUpExceedMaxSpped(t *testing.T) {
 	rocket := NewRocket("Saturn-V", "Nasa", 5, 25000)
 	rocket.AddFuel(100)
 
-	_ = rocket.Ignite()
+	rocket.Ignite()
 
-	_, _ = rocket.ThrottleUp(25000)
+	rocket.ThrottleUp(25000)
 	_, err := rocket.ThrottleUp(100)
 
 	if err == nil {
@@ -90,16 +94,17 @@ func TestThrottleDownEnginesNotIgnited(t *testing.T) {
 	}
 }
 
+//nolint:errcheck
 func TestThrottleDown(t *testing.T) {
 	rocket := NewRocket("Saturn-V", "Nasa", 5, 25000)
 	rocket.AddFuel(100)
 
-	_ = rocket.Ignite()
+	rocket.Ignite()
 
-	_, _ = rocket.ThrottleUp(1000)
-	_, _ = rocket.ThrottleUp(100)
-	_, _ = rocket.ThrottleUp(100)
-	_, _ = rocket.ThrottleDown(10)
+	rocket.ThrottleUp(1000)
+	rocket.ThrottleUp(100)
+	rocket.ThrottleUp(100)
+	rocket.ThrottleDown(10)
 	got, _ := rocket.ThrottleDown(10)
 	want := 1180
 
@@ -108,13 +113,14 @@ func TestThrottleDown(t *testing.T) {
 	}
 }
 
+//nolint:errcheck
 func TestThrottleDownToUnder1000(t *testing.T) {
 	rocket := NewRocket("Saturn-V", "Nasa", 5, 25000)
 	rocket.AddFuel(100)
 
-	_ = rocket.Ignite()
+	rocket.Ignite()
 
-	_, _ = rocket.ThrottleUp(900)
+	rocket.ThrottleUp(900)
 	_, err := rocket.ThrottleDown(10)
 
 	if err == nil {
@@ -122,17 +128,18 @@ func TestThrottleDownToUnder1000(t *testing.T) {
 	}
 }
 
+//nolint:errcheck
 func TestCurrentSpeed(t *testing.T) {
 	rocket := NewRocket("Saturn-V", "Nasa", 5, 25000)
 	rocket.AddFuel(100)
 
-	_ = rocket.Ignite()
+	rocket.Ignite()
 
-	_, _ = rocket.ThrottleUp(1000)
-	_, _ = rocket.ThrottleUp(100)
-	_, _ = rocket.ThrottleDown(10)
-	_, _ = rocket.ThrottleUp(100)
-	_, _ = rocket.ThrottleDown(5)
+	rocket.ThrottleUp(1000)
+	rocket.ThrottleUp(100)
+	rocket.ThrottleDown(10)
+	rocket.ThrottleUp(100)
+	rocket.ThrottleDown(5)
 
 	got := rocket.CurrentSpeed()
 	want := 1185
