@@ -32,6 +32,4 @@ func main() {
 
 	currentSpeed, _ = rocket.ThrottleDown(5)
 	fmt.Printf("%s current speed: %d\n", rocket.Name, currentSpeed)
-
-	fmt.Printf("%s current speed: %d\n", rocket.Name, currentSpeed)
 }
