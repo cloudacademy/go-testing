@@ -40,6 +40,6 @@ jobs:
       with:
         tag_name: ${{ steps.tag.outputs.release_tag }}
         files:
-          out/bin/rocket
+          out/bin/rocket-*
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
