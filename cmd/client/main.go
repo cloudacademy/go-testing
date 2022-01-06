@@ -18,6 +18,7 @@ func main() {
 	}
 	fmt.Printf("%s rocket ignited...\n", rocket.Name)
 
+	//track speed
 	currentSpeed := 0
 
 	currentSpeed, _ = rocket.ThrottleUp(1000)
