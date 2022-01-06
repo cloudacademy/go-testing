@@ -19,4 +19,21 @@ jobs:
         go-version: 1.17
 
     - name: Build
-      run: make all
+      run: |
+        make all
+        mkdir release
+        cp out/bin/rocket release
+
+    - name: Artifact Upload
+      uses: actions/upload-artifact@v2
+      with:
+        name: Package
+        path: release
+
+    - name: Make Release
+      uses: softprops/action-gh-release@v0.1.5
+      with:
+        files:
+          out/bin/rocket
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
