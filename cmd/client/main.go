@@ -7,9 +7,11 @@ import (
 )
 
 func main() {
+	//create rocket
 	rocket := rocket.NewRocket("Saturn-V", "Nasa", 5, 25000, 100)
 	fmt.Printf("%s rocket built...\n", rocket.Name)
 
+	//ignite rocket
 	err := rocket.Ignite()
 	if err != nil {
 		panic("ignition failed!")
