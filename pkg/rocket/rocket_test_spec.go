@@ -7,9 +7,7 @@ import (
 
 var _ = Describe("Rocket", func() {
 
-	var (
-		rocket *Rocket
-	)
+	var rocket *Rocket
 
 	BeforeEach(func() {
 		rocket = NewRocket("Saturn-V", "Nasa", 5, 25000)
