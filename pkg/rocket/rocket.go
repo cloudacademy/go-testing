@@ -19,7 +19,7 @@ type Rocket struct {
 	Speed        int
 }
 
-func NewRocket(name string, manufacturer string, engines int, maxSpeed int, fuel int) *Rocket {
+func NewRocket(name string, manufacturer string, engines int, maxSpeed int) *Rocket {
 	engConf := EngineConfig{
 		Count:   engines,
 		Ignited: false,
@@ -30,9 +30,13 @@ func NewRocket(name string, manufacturer string, engines int, maxSpeed int, fuel
 		Manufacturer: manufacturer,
 		Engines:      engConf,
 		Maxspeed:     maxSpeed,
-		Fuel:         fuel,
+		Fuel:         0,
 		Speed:        0,
 	}
+}
+
+func (r *Rocket) AddFuel(fuel int) {
+	r.Fuel = fuel
 }
 
 func (r *Rocket) Ignite() error {

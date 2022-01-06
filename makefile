@@ -22,4 +22,7 @@ test:
 testcov:
 	go test -v ./... -coverprofile=coverage.out
 
+testginkgo:
+	ginkgo -v -cover ./...
+
 all: clean testcov buildall

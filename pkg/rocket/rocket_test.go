@@ -5,7 +5,8 @@ import (
 )
 
 func TestNewRocket(t *testing.T) {
-	rocket := NewRocket("Saturn-V", "Nasa", 5, 25000, 100)
+	rocket := NewRocket("Saturn-V", "Nasa", 5, 25000)
+	rocket.AddFuel(100)
 
 	got := rocket.Name
 	want := "Saturn-V"
@@ -16,7 +17,8 @@ func TestNewRocket(t *testing.T) {
 }
 
 func TestIgniteRocket(t *testing.T) {
-	rocket := NewRocket("Saturn-V", "Nasa", 5, 25000, 100)
+	rocket := NewRocket("Saturn-V", "Nasa", 5, 25000)
+	rocket.AddFuel(100)
 
 	_ = rocket.Ignite()
 	got := rocket.Engines.Ignited
@@ -28,7 +30,7 @@ func TestIgniteRocket(t *testing.T) {
 }
 
 func TestIgniteRocketEmpty(t *testing.T) {
-	rocket := NewRocket("Saturn-V", "Nasa", 5, 25000, 0)
+	rocket := NewRocket("Saturn-V", "Nasa", 5, 25000)
 
 	err := rocket.Ignite()
 	if err == nil {
@@ -37,7 +39,8 @@ func TestIgniteRocketEmpty(t *testing.T) {
 }
 
 func TestThrottleUpEnginesNotIgnited(t *testing.T) {
-	rocket := NewRocket("Saturn-V", "Nasa", 5, 25000, 100)
+	rocket := NewRocket("Saturn-V", "Nasa", 5, 25000)
+	rocket.AddFuel(100)
 
 	_, err := rocket.ThrottleUp(100)
 
@@ -47,7 +50,9 @@ func TestThrottleUpEnginesNotIgnited(t *testing.T) {
 }
 
 func TestThrottleUp(t *testing.T) {
-	rocket := NewRocket("Saturn-V", "Nasa", 5, 25000, 100)
+	rocket := NewRocket("Saturn-V", "Nasa", 5, 25000)
+	rocket.AddFuel(100)
+
 	_ = rocket.Ignite()
 
 	_, _ = rocket.ThrottleUp(100)
@@ -61,7 +66,9 @@ func TestThrottleUp(t *testing.T) {
 }
 
 func TestThrottleUpExceedMaxSpped(t *testing.T) {
-	rocket := NewRocket("Saturn-V", "Nasa", 5, 25000, 100)
+	rocket := NewRocket("Saturn-V", "Nasa", 5, 25000)
+	rocket.AddFuel(100)
+
 	_ = rocket.Ignite()
 
 	_, _ = rocket.ThrottleUp(25000)
@@ -73,7 +80,8 @@ func TestThrottleUpExceedMaxSpped(t *testing.T) {
 }
 
 func TestThrottleDownEnginesNotIgnited(t *testing.T) {
-	rocket := NewRocket("Saturn-V", "Nasa", 5, 25000, 100)
+	rocket := NewRocket("Saturn-V", "Nasa", 5, 25000)
+	rocket.AddFuel(100)
 
 	_, err := rocket.ThrottleDown(100)
 
@@ -83,7 +91,9 @@ func TestThrottleDownEnginesNotIgnited(t *testing.T) {
 }
 
 func TestThrottleDown(t *testing.T) {
-	rocket := NewRocket("Saturn-V", "Nasa", 5, 25000, 100)
+	rocket := NewRocket("Saturn-V", "Nasa", 5, 25000)
+	rocket.AddFuel(100)
+
 	_ = rocket.Ignite()
 
 	_, _ = rocket.ThrottleUp(1000)
@@ -99,7 +109,9 @@ func TestThrottleDown(t *testing.T) {
 }
 
 func TestThrottleDownToUnder1000(t *testing.T) {
-	rocket := NewRocket("Saturn-V", "Nasa", 5, 25000, 100)
+	rocket := NewRocket("Saturn-V", "Nasa", 5, 25000)
+	rocket.AddFuel(100)
+
 	_ = rocket.Ignite()
 
 	_, _ = rocket.ThrottleUp(900)
@@ -111,7 +123,9 @@ func TestThrottleDownToUnder1000(t *testing.T) {
 }
 
 func TestCurrentSpeed(t *testing.T) {
-	rocket := NewRocket("Saturn-V", "Nasa", 5, 25000, 100)
+	rocket := NewRocket("Saturn-V", "Nasa", 5, 25000)
+	rocket.AddFuel(100)
+
 	_ = rocket.Ignite()
 
 	_, _ = rocket.ThrottleUp(1000)

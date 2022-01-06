@@ -8,8 +8,11 @@ import (
 
 func main() {
 	//create rocket
-	rocket := rocket.NewRocket("Saturn-V", "Nasa", 5, 25000, 100)
+	rocket := rocket.NewRocket("Saturn-V", "Nasa", 5, 25000)
 	fmt.Printf("%s rocket built...\n", rocket.Name)
+
+	//adding fuel
+	rocket.AddFuel(100)
 
 	//ignite rocket
 	err := rocket.Ignite()
