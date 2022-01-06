@@ -22,7 +22,7 @@ jobs:
       run: |
         make all
         mkdir release
-        cp out/bin/rocket release
+        cp out/bin/rocket-* release
 
     - name: Artifact Upload
       uses: actions/upload-artifact@v2
