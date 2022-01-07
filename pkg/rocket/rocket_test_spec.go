@@ -1,7 +1,9 @@
 package rocket
 
 import (
+	//lint:ignore ST1001 testing framework
 	. "github.com/onsi/ginkgo"
+	//lint:ignore ST1001 testing framework
 	. "github.com/onsi/gomega"
 )
 
