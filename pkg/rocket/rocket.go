@@ -50,7 +50,7 @@ func (r *Rocket) Ignite() error {
 func (r *Rocket) ThrottleUp(amount int) (int, error) {
 	if r.Engines.Ignited {
 		if r.Speed+amount <= r.Maxspeed {
-			r.Speed = r.Speed + amount
+			r.Speed += amount
 			return r.Speed, nil
 		} else {
 			return r.Speed, errors.New("exceeds max speed")
@@ -65,7 +65,7 @@ func (r *Rocket) ThrottleDown(amount int) (int, error) {
 		if r.Speed-amount <= 1000 {
 			return r.Speed, errors.New("new speed too low")
 		} else {
-			r.Speed = r.Speed - amount
+			r.Speed -= amount
 			return r.Speed, nil
 		}
 	} else {
